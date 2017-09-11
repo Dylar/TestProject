@@ -54,6 +54,9 @@ dependencies {
     compile "com.android.support:percent:$supportSDK"
     compile "com.android.support:recyclerview-v7:$supportSDK"
 
+    //cache
+    compile 'com.nytimes.android:cache3:3.0.0-beta'
+
     //database
     compile 'io.requery:requery:1.4.0'
     compile 'io.requery:requery-android:1.4.0'
