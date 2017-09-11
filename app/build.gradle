@@ -1,31 +1,75 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "dylar.lbl.testproject"
+        applicationId "dylar.bitb.testproject"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionName "0.1"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                   outputFileName = "${variant.name}-${variant.versionName}.apk"
+                }
+            }
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationId "dev.dylar.bitb.testproject"
+        }
+
+        prod {
+            dimension "default"
+            applicationId "dylar.bitb.testproject"
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.0.2'
-    implementation 'com.android.support:design:26.0.2'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    //time
+    compile 'net.danlew:android.joda:2.9.9'
+    //permissions
+    compile 'com.karumi:dexter:4.1.0'
+
+    //support
+    compile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.android.support:support-v4:$supportSDK"
+    compile "com.android.support:appcompat-v7:$supportSDK"
+    compile "com.android.support:design:$supportSDK"
+    compile "com.android.support:percent:$supportSDK"
+    compile "com.android.support:recyclerview-v7:$supportSDK"
+
+    //database
+    compile 'io.requery:requery:1.4.0'
+    compile 'io.requery:requery-android:1.4.0'
+    annotationProcessor 'io.requery:requery-processor:1.4.0'
+
+    //network
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //cleanCode
+    provided "org.projectlombok:lombok:$lombok"
+    annotationProcessor "org.projectlombok:lombok:$lombok"
+    compile "com.google.dagger:dagger:$dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+    compile "com.jakewharton:butterknife:$butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
+    provided 'javax.annotation:jsr250-api:1.0'
 }
+
