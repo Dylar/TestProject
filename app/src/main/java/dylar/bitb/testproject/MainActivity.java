@@ -14,8 +14,10 @@ import dylar.bitb.testproject.base.view.BaseActivity;
 import dylar.bitb.testproject.feature.dashboard.view.DashboardFragment;
 import dylar.bitb.testproject.feature.home.IMainView;
 import dylar.bitb.testproject.feature.home.MainPresenter;
+import easymvp.annotation.ActivityView;
 import easymvp.annotation.Presenter;
 
+@ActivityView(presenter = MainPresenter.class)
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, IMainView {
 
     @Inject
@@ -31,6 +33,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.mainactivity_navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mTextMessage.setText(presenter.getTitle());
     }
