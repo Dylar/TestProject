@@ -1,4 +1,4 @@
-package dylar.bitb.testproject.feature.home;
+package dylar.bitb.testproject.ui.home;
 
 import javax.inject.Inject;
 

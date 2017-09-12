@@ -1,4 +1,4 @@
-package dylar.bitb.testproject.feature.dashboard.view;
+package dylar.bitb.testproject.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import dylar.bitb.testproject.R;
-import dylar.bitb.testproject.base.injection.AppComponent;
-import dylar.bitb.testproject.base.view.BaseFragment;
-import dylar.bitb.testproject.feature.dashboard.contract.IDashboardView;
-import dylar.bitb.testproject.feature.dashboard.presenter.DashboardPresenter;
+import dylar.bitb.testproject.base.AppComponent;
+import dylar.bitb.testproject.ui.base.BaseFragment;
 import easymvp.annotation.FragmentView;
 import easymvp.annotation.Presenter;
 

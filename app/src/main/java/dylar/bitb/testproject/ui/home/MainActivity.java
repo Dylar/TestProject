@@ -1,7 +1,6 @@
-package dylar.bitb.testproject;
+package dylar.bitb.testproject.ui.home;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -9,11 +8,10 @@ import android.widget.TextView;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import dylar.bitb.testproject.base.injection.AppComponent;
-import dylar.bitb.testproject.base.view.BaseActivity;
-import dylar.bitb.testproject.feature.dashboard.view.DashboardFragment;
-import dylar.bitb.testproject.feature.home.IMainView;
-import dylar.bitb.testproject.feature.home.MainPresenter;
+import dylar.bitb.testproject.R;
+import dylar.bitb.testproject.base.AppComponent;
+import dylar.bitb.testproject.ui.base.BaseActivity;
+import dylar.bitb.testproject.ui.dashboard.DashboardFragment;
 import easymvp.annotation.ActivityView;
 import easymvp.annotation.Presenter;
 
@@ -59,7 +57,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 mTextMessage.setText(R.string.title_home);

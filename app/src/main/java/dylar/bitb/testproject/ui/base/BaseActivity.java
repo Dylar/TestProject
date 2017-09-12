@@ -1,4 +1,4 @@
-package dylar.bitb.testproject.base.view;
+package dylar.bitb.testproject.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
-import dylar.bitb.testproject.base.app.App;
-import dylar.bitb.testproject.base.injection.AppComponent;
+import dylar.bitb.testproject.base.App;
+import dylar.bitb.testproject.base.AppComponent;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
