@@ -1,4 +1,4 @@
-package dylar.lbl.testproject;
+package dylar.bitb.testproject;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

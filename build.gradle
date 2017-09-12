@@ -21,6 +21,7 @@ allprojects {
         lombok = '1.16.18'
         butterknife = '8.8.1'
         dagger = '2.11'
+        chacheHandling = '3.0.0-beta'
 
         rxJava2 = '2.1.1'
         retrofit = '2.3.0'

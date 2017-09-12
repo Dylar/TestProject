@@ -55,7 +55,12 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$supportSDK"
 
     //cache
-    compile 'com.nytimes.android:cache3:3.0.0-beta'
+    compile "com.nytimes.android:cache3:$chacheHandling"
+    compile "com.nytimes.android:store3:$chacheHandling"
+    compile "com.nytimes.android:middleware3:$chacheHandling"
+    compile "com.nytimes.android:middleware-jackson3:$chacheHandling"
+    compile "com.nytimes.android:middleware-moshi3:$chacheHandling"
+    compile "com.nytimes.android:filesystem3:$chacheHandling"
 
     //database
     compile 'io.requery:requery:1.4.0'
