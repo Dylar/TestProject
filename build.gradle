@@ -4,10 +4,12 @@ buildscript {
     repositories {
         jcenter()
         google()
+        maven { url  "http://dl.bintray.com/6thsolution/easymvp" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-beta4'
         classpath 'me.tatarka:gradle-retrolambda:3.6.1'
+        classpath 'com.sixthsolution.easymvp:easymvp-plugin:1.2.0-beta10'
     }
 }
 
@@ -15,17 +17,18 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven { url  "http://dl.bintray.com/6thsolution/easymvp" }
     }
     ext {
         supportSDK = '25.4.0'
         lombok = '1.16.18'
         butterknife = '8.8.1'
         dagger = '2.11'
-        chacheHandling = '3.0.0-beta'
+        store = '3.0.0-beta'
+        requery = '1.4.0'
+        retrofit = '2.3.0'
 
         rxJava2 = '2.1.1'
-        retrofit = '2.3.0'
-        store = '3.0.0-beta'
     }
 }
 

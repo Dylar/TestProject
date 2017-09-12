@@ -5,11 +5,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dylar.lbl.testproject.MainActivity">
+    tools:context="dylar.bitb.testproject.MainActivity">
 
     <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
+        android:id="@+id/mainactivity_title"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -18,8 +19,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <FrameLayout
+        android:id="@+id/mainactivity_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/mainactivity_navigation"
+        app:layout_constraintTop_toBottomOf="@+id/mainactivity_title">
+
+    </FrameLayout>
+
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/mainactivity_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="0dp"
