@@ -1,5 +1,7 @@
 package dylar.bitb.testproject.ui.dashboard;
 
 
-public interface IDashboardView {
+import dylar.bitb.testproject.ui.model.IGooAndPrickleView;
+
+public interface IDashboardView extends IGooAndPrickleView{
 }

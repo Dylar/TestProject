@@ -1,4 +1,4 @@
-package dylar.bitb.testproject.ui.dashboard;
+package dylar.bitb.testproject.ui.notifications;
 
 
 import dylar.bitb.testproject.model.Goo;
@@ -7,7 +7,7 @@ import dylar.bitb.testproject.ui.model.IGooRowView;
 import dylar.bitb.testproject.ui.model.IPrickleRowView;
 import easymvp.RxPresenter;
 
-public class DashboardPresenter extends RxPresenter<IDashboardView> {
+public class NotificationPresenter extends RxPresenter<INotificationView> {
 
     public static final int DUMMY_GOO_COUNT = 14;
     public static final int DUMMY_PRICKLE_COUNT = 4;

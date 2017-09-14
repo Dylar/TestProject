@@ -5,15 +5,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import dylar.bitb.testproject.base.App;
-import dylar.bitb.testproject.base.AppComponent;
+import dylar.bitb.testproject.base.IDependencyInjection;
 
 public abstract class  BaseFragment extends Fragment{
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        injectDependency(((App)getActivity().getApplication()).getAppComponent());
+        if (this instanceof IDependencyInjection) {
+            ((IDependencyInjection)this).injectDependency(((App)getActivity().getApplication()).getAppComponent());
+        }
         super.onCreate(savedInstanceState);
     }
-
-    public abstract void injectDependency(AppComponent appComponent);
 }

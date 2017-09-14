@@ -1,8 +1,8 @@
-package dylar.bitb.testproject.ui.dashboard;
+package dylar.bitb.testproject.ui.notifications;
 
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +18,18 @@ import dylar.bitb.testproject.ui.model.IPrickleRowView;
 import easymvp.annotation.FragmentView;
 import easymvp.annotation.Presenter;
 
-@FragmentView(presenter = DashboardPresenter.class)
-public class DashboardFragment extends BaseFragment implements IDashboardView {
+@FragmentView(presenter = NotificationPresenter.class)
+public class NotificationFragment extends BaseFragment implements INotificationView {
 
     @Presenter
-    DashboardPresenter dashboardPresenter;
+    NotificationPresenter notificationPresenter;
 
     @BindView(R.id.fragment_dashboard_recyclerview)
     RecyclerView recyclerView;
 
-    public static DashboardFragment createInstance() {
-        DashboardFragment dashboardFragment = new DashboardFragment();
-        return dashboardFragment;
+    public static NotificationFragment createInstance() {
+        NotificationFragment notificationFragment = new NotificationFragment();
+        return notificationFragment;
     }
 
     @Override
@@ -47,22 +47,22 @@ public class DashboardFragment extends BaseFragment implements IDashboardView {
         GooAndPrickleAdapter adapter = new GooAndPrickleAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
     public int getListCount() {
-        return dashboardPresenter.getGooAndPrickleCount();
+        return notificationPresenter.getGooAndPrickleCount();
     }
 
     @Override
     public void setRowGoo(IGooRowView holder, int position) {
-        dashboardPresenter.setGoo(holder, position);
+        notificationPresenter.setGoo(holder, position);
     }
 
     @Override
     public void setRowPrickle(IPrickleRowView holder, int position) {
-        dashboardPresenter.setPrickle(holder, position);
+        notificationPresenter.setPrickle(holder, position);
     }
 
 }

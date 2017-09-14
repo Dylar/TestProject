@@ -8,4 +8,7 @@ import lombok.Setter;
 public class Something {
 
     public String name;
+
+    public Something() {
+    }
 }

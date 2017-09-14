@@ -3,42 +3,35 @@ package dylar.bitb.testproject.ui.home;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import dylar.bitb.testproject.R;
 import dylar.bitb.testproject.base.AppComponent;
+import dylar.bitb.testproject.base.IDependencyInjection;
 import dylar.bitb.testproject.ui.base.BaseActivity;
 import dylar.bitb.testproject.ui.dashboard.DashboardFragment;
+import dylar.bitb.testproject.ui.notifications.NotificationFragment;
 import easymvp.annotation.ActivityView;
 import easymvp.annotation.Presenter;
 
 @ActivityView(presenter = MainPresenter.class)
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, IMainView {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, IMainView, IDependencyInjection {
 
     @Inject
     @Presenter
     MainPresenter presenter;
+    private int currentFocus;
 
-    @BindView(R.id.mainactivity_title)
-    protected TextView mTextMessage;
+    @BindView(R.id.mainactivity_navigation)
+    BottomNavigationView navigation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.mainactivity_navigation);
         navigation.setOnNavigationItemSelectedListener(this);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mTextMessage.setText(presenter.getTitle());
     }
 
     @Override
@@ -58,17 +51,33 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                mTextMessage.setText(R.string.title_home);
-                return true;
-            case R.id.navigation_dashboard:
-                addOrReplaceFragment(DashboardFragment.createInstance());
-                return true;
-            case R.id.navigation_notifications:
-                mTextMessage.setText(R.string.title_notifications);
-                return true;
+        int id = item.getItemId();
+        if (id != currentFocus) {
+            currentFocus = id;
+            switch (id) {
+                case R.id.navigation_home:
+                    addOrReplaceFragment(HomeFragment.createInstance());
+                    return true;
+                case R.id.navigation_dashboard:
+                    addOrReplaceFragment(DashboardFragment.createInstance());
+                    return true;
+                case R.id.navigation_notifications:
+                    addOrReplaceFragment(NotificationFragment.createInstance());
+                    return true;
+            }
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        MenuItem homeItem = navigation.getMenu().getItem(0);
+
+        if (currentFocus != homeItem.getItemId()) {
+            // Select home item
+            navigation.setSelectedItemId(homeItem.getItemId());
+        } else {
+            super.onBackPressed();
+        }
     }
 }
