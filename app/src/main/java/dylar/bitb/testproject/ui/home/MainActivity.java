@@ -2,7 +2,11 @@ package dylar.bitb.testproject.ui.home;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,16 +26,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Inject
     @Presenter
     MainPresenter presenter;
-    private int currentFocus;
-
     @BindView(R.id.mainactivity_navigation)
     BottomNavigationView navigation;
+    private List<Integer> buttonHistory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         navigation.setOnNavigationItemSelectedListener(this);
+        buttonHistory = new ArrayList<>();
+        addOrReplaceFragment(HomeFragment.createInstance());
     }
 
     @Override
@@ -52,8 +57,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id != currentFocus) {
-            currentFocus = id;
+        if (buttonHistory.isEmpty() || id != buttonHistory.get(buttonHistory.size() - 1)) {
+            buttonHistory.add(id);
             switch (id) {
                 case R.id.navigation_home:
                     addOrReplaceFragment(HomeFragment.createInstance());
@@ -65,19 +70,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     addOrReplaceFragment(NotificationFragment.createInstance());
                     return true;
             }
+
         }
         return false;
     }
 
     @Override
     public void onBackPressed() {
-        MenuItem homeItem = navigation.getMenu().getItem(0);
-
-        if (currentFocus != homeItem.getItemId()) {
-            // Select home item
-            navigation.setSelectedItemId(homeItem.getItemId());
-        } else {
-            super.onBackPressed();
+        if (!buttonHistory.isEmpty()) {
+            buttonHistory.remove(buttonHistory.size() - 1);
+            Menu menu = navigation.getMenu();
+            int id = buttonHistory.isEmpty() ? R.id.navigation_home : buttonHistory.get(buttonHistory.size() - 1);
+            for (int i = 0; i < menu.size(); i++) {
+                MenuItem item = menu.getItem(i);
+                if (item.getItemId() == id) {
+                    item.setChecked(true);
+                }
+            }
         }
+        super.onBackPressed();
     }
 }
