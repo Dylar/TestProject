@@ -7,8 +7,9 @@ import lombok.Setter;
 @Setter
 public class Something {
 
-    public String name;
+    public String uuid;
 
     public Something() {
+
     }
 }

@@ -1,7 +1,9 @@
 package dylar.bitb.testproject.ui.dashboard;
 
 
-import dylar.bitb.testproject.model.Goo;
+import javax.inject.Inject;
+
+import dylar.bitb.testproject.controller.GooController;
 import dylar.bitb.testproject.model.Prickle;
 import dylar.bitb.testproject.ui.model.IGooRowView;
 import dylar.bitb.testproject.ui.model.IPrickleRowView;
@@ -11,6 +13,12 @@ public class DashboardPresenter extends RxPresenter<IDashboardView> {
 
     public static final int DUMMY_GOO_COUNT = 14;
     public static final int DUMMY_PRICKLE_COUNT = 4;
+    private final GooController gooController;
+
+    @Inject
+    public DashboardPresenter(GooController gooController){
+        this.gooController = gooController;
+    }
 
     public int getGooAndPrickleCount() {
         return getGooCount() + getPrickleCount();
@@ -25,10 +33,10 @@ public class DashboardPresenter extends RxPresenter<IDashboardView> {
     }
 
     public void setGoo(IGooRowView holder, int position) {
-        holder.setText(new Goo().getName());
+        holder.setGoo(gooController.createNewGoo());
     }
 
     public void setPrickle(IPrickleRowView holder, int position) {
-        holder.setText(new Prickle().getName());
+        holder.setText(new Prickle().getUuid());
     }
 }

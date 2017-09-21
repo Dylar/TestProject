@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import dylar.bitb.testproject.R;
-import dylar.bitb.testproject.utils.Logger;
 
 
 public class GooAndPrickleAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -25,11 +24,9 @@ public class GooAndPrickleAdapter extends RecyclerView.Adapter<ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_GOO:
-                Logger.error("create GOO");
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_dashboard_row_goo, parent, false);
                 return new GooViewHolder(view);
             case VIEW_PRICKLE:
-                Logger.error("create PRICKLE");
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_dashboard_row_prickle, parent, false);
                 return new PrickleViewHolder(view);
         }
@@ -40,11 +37,10 @@ public class GooAndPrickleAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case VIEW_GOO:
-                Logger.error("bind GOO");
                 gooAndPrickleView.setRowGoo((IGooRowView) holder, position);
+                ((IGooRowView) holder).setDetailClickListener(gooAndPrickleView);
                 break;
             case VIEW_PRICKLE:
-                Logger.error("bind PRICKLE");
                 gooAndPrickleView.setRowPrickle((IPrickleRowView) holder, position);
                 break;
         }

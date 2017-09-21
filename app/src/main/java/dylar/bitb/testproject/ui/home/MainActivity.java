@@ -1,41 +1,28 @@
 package dylar.bitb.testproject.ui.home;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import dylar.bitb.testproject.R;
 import dylar.bitb.testproject.base.AppComponent;
 import dylar.bitb.testproject.base.IDependencyInjection;
-import dylar.bitb.testproject.ui.base.BaseActivity;
+import dylar.bitb.testproject.ui.base.NavigationActivity;
 import dylar.bitb.testproject.ui.dashboard.DashboardFragment;
 import dylar.bitb.testproject.ui.notifications.NotificationFragment;
 import easymvp.annotation.ActivityView;
 import easymvp.annotation.Presenter;
 
 @ActivityView(presenter = MainPresenter.class)
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, IMainView, IDependencyInjection {
+public class MainActivity extends NavigationActivity implements IMainView, IDependencyInjection {
 
     @Inject
     @Presenter
     MainPresenter presenter;
-    @BindView(R.id.mainactivity_navigation)
-    BottomNavigationView navigation;
-    private List<Integer> buttonHistory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        buttonHistory = new ArrayList<>();
         addOrReplaceFragment(HomeFragment.createInstance());
     }
 
@@ -55,39 +42,30 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (buttonHistory.isEmpty() || id != buttonHistory.get(buttonHistory.size() - 1)) {
-            buttonHistory.add(id);
-            switch (id) {
-                case R.id.navigation_home:
-                    addOrReplaceFragment(HomeFragment.createInstance());
-                    return true;
-                case R.id.navigation_dashboard:
-                    addOrReplaceFragment(DashboardFragment.createInstance());
-                    return true;
-                case R.id.navigation_notifications:
-                    addOrReplaceFragment(NotificationFragment.createInstance());
-                    return true;
-            }
+    public int getNavigationLayout() {
+        return R.menu.navigation;
+    }
 
+    @Override
+    public int getFirstTabId() {
+        return R.id.navigation_home;
+    }
+
+    @Override
+    protected boolean navigateTo(int id) {
+        switch (id) {
+            case R.id.navigation_home:
+                addOrReplaceFragment(HomeFragment.createInstance());
+                return true;
+            case R.id.navigation_dashboard:
+                addOrReplaceFragment(DashboardFragment.createInstance());
+                return true;
+            case R.id.navigation_notifications:
+                addOrReplaceFragment(NotificationFragment.createInstance());
+                return true;
         }
         return false;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (!buttonHistory.isEmpty()) {
-            buttonHistory.remove(buttonHistory.size() - 1);
-            Menu menu = navigation.getMenu();
-            int id = buttonHistory.isEmpty() ? R.id.navigation_home : buttonHistory.get(buttonHistory.size() - 1);
-            for (int i = 0; i < menu.size(); i++) {
-                MenuItem item = menu.getItem(i);
-                if (item.getItemId() == id) {
-                    item.setChecked(true);
-                }
-            }
-        }
-        super.onBackPressed();
-    }
+
 }

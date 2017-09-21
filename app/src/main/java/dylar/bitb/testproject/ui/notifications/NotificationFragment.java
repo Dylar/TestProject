@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import dylar.bitb.testproject.R;
+import dylar.bitb.testproject.base.AppComponent;
+import dylar.bitb.testproject.base.IDependencyInjection;
 import dylar.bitb.testproject.ui.base.BaseFragment;
 import dylar.bitb.testproject.ui.model.GooAndPrickleAdapter;
 import dylar.bitb.testproject.ui.model.IGooRowView;
@@ -19,8 +22,9 @@ import easymvp.annotation.FragmentView;
 import easymvp.annotation.Presenter;
 
 @FragmentView(presenter = NotificationPresenter.class)
-public class NotificationFragment extends BaseFragment implements INotificationView {
+public class NotificationFragment extends BaseFragment implements INotificationView, IDependencyInjection {
 
+    @Inject
     @Presenter
     NotificationPresenter notificationPresenter;
 
@@ -33,14 +37,22 @@ public class NotificationFragment extends BaseFragment implements INotificationV
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+    public void injectDependency(AppComponent appComponent) {
+        appComponent.inject(this);
+    }
 
-        ButterKnife.bind(this, rootView);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater,container,savedInstanceState);
 
         setupRecyclerView();
 
         return rootView;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_dashboard;
     }
 
     private void setupRecyclerView() {
@@ -65,4 +77,8 @@ public class NotificationFragment extends BaseFragment implements INotificationV
         notificationPresenter.setPrickle(holder, position);
     }
 
+    @Override
+    public void openGooDetails(String id) {
+
+    }
 }

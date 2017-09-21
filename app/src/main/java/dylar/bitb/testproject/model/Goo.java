@@ -1,10 +1,15 @@
 package dylar.bitb.testproject.model;
 
+import lombok.Getter;
 
-public class Goo extends Something{
+public class Goo extends Something {
 
-    public Goo(){
+    @Getter
+    private int gooness;
+
+    public Goo(int gooness) {
         super();
-        setName(toString());
+        this.gooness = gooness;
     }
+
 }

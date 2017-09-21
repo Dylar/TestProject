@@ -3,21 +3,17 @@ package dylar.bitb.testproject.utils;
 
 import android.support.v4.app.FragmentTransaction;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import dylar.bitb.testproject.R;
 
+@Singleton
 public class AnimationUtils {
 
-    private static AnimationUtils instance;
+    @Inject
+    public AnimationUtils() {
 
-    private AnimationUtils() {
-
-    }
-
-    public static AnimationUtils getInstance() {
-        if (instance == null) {
-            instance = new AnimationUtils();
-        }
-        return instance;
     }
 
     public void setAnimations(FragmentTransaction fragmentTransaction) {

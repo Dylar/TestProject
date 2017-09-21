@@ -2,6 +2,7 @@ package dylar.bitb.testproject.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,9 +12,8 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import dylar.bitb.testproject.base.App;
 import dylar.bitb.testproject.base.IDependencyInjection;
-import dylar.bitb.testproject.utils.AnimationUtils;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,11 +23,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+
     }
 
     protected abstract int getLayoutId();
 
-    public abstract int getContentContainer();
+    protected abstract int getContentContainer();
 
     public void addOrReplaceFragment(BaseFragment fragment) {
         addOrReplaceFragment(fragment, getContentContainer());
@@ -39,10 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
-        AnimationUtils.getInstance().setAnimations(fragmentTransaction);
+//        AnimationUtils.getInstance().setAnimations(fragmentTransaction);
 
         Fragment oldFragment = manager.findFragmentByTag(tag);
-        if(oldFragment != null){
+        if (oldFragment != null) {
             fragment = (BaseFragment) oldFragment;
         }
 
@@ -55,5 +56,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         fragmentTransaction.commitAllowingStateLoss();
     }
-
 }
