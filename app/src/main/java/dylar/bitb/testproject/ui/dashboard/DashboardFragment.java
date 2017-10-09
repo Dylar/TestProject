@@ -16,9 +16,9 @@ import dylar.bitb.testproject.base.AppComponent;
 import dylar.bitb.testproject.base.IDependencyInjection;
 import dylar.bitb.testproject.ui.base.BaseFragment;
 import dylar.bitb.testproject.ui.details.goo.GooDetailActivity;
-import dylar.bitb.testproject.ui.model.GooAndPrickleAdapter;
-import dylar.bitb.testproject.ui.model.IGooRowView;
-import dylar.bitb.testproject.ui.model.IPrickleRowView;
+import dylar.bitb.testproject.ui.model.gooprickle.GooAndPrickleAdapter;
+import dylar.bitb.testproject.ui.model.gooprickle.IGooRowView;
+import dylar.bitb.testproject.ui.model.gooprickle.IPrickleRowView;
 import easymvp.annotation.FragmentView;
 import easymvp.annotation.Presenter;
 

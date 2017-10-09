@@ -1,4 +1,4 @@
-package dylar.bitb.testproject.ui.model;
+package dylar.bitb.testproject.ui.model.gooprickle;
 
 
 import dylar.bitb.testproject.ui.base.IBaseView;

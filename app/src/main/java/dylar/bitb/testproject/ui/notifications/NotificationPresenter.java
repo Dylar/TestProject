@@ -1,42 +1,53 @@
 package dylar.bitb.testproject.ui.notifications;
 
 
+import com.nytimes.android.external.store3.base.impl.BarCode;
+
 import javax.inject.Inject;
 
-import dylar.bitb.testproject.controller.GooController;
-import dylar.bitb.testproject.model.Prickle;
-import dylar.bitb.testproject.ui.model.IGooRowView;
-import dylar.bitb.testproject.ui.model.IPrickleRowView;
+import dylar.bitb.testproject.controller.RedditController;
+import dylar.bitb.testproject.model.Reddit;
 import easymvp.RxPresenter;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class NotificationPresenter extends RxPresenter<INotificationView> {
 
-    public static final int DUMMY_GOO_COUNT = 14;
-    public static final int DUMMY_PRICKLE_COUNT = 4;
-    private final GooController gooController;
+    private final RedditController redditController;
 
     @Inject
-    public NotificationPresenter(GooController gooController){
-        this.gooController = gooController;
+    public NotificationPresenter(RedditController redditController){
+        this.redditController = redditController;
     }
 
-    public int getGooAndPrickleCount() {
-        return getGooCount() + getPrickleCount();
+    public void onCreate(){
+
     }
 
-    public int getGooCount() {
-        return DUMMY_GOO_COUNT;
+    protected void onResume() {
+        loadPosts();
     }
 
-    public int getPrickleCount() {
-        return DUMMY_PRICKLE_COUNT;
+    @SuppressWarnings("CheckReturnValue")
+    public void loadPosts() {
+        BarCode awwRequest = new BarCode(Reddit.class.getSimpleName(), "drugs");
+
+        this.redditController.getPersistedStore()
+                .get(awwRequest)
+//                .flatMapObservable(this::sanitizeData)
+//                .toList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::showPosts);
     }
 
-    public void setGoo(IGooRowView holder, int position) {
-        holder.setGoo(gooController.createNewGoo());
+
+
+    private void showPosts(Reddit posts) {
+        getView().showPost(posts);
     }
 
-    public void setPrickle(IPrickleRowView holder, int position) {
-        holder.setText(new Prickle().getUuid());
-    }
+//    private Observable<Reddit> sanitizeData(Reddit redditData) {
+//        return Observable.fromIterable(redditData.data().children()).map(Children::data);
+//    }
 }

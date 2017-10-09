@@ -1,15 +1,14 @@
-package dylar.bitb.testproject.ui.model;
+package dylar.bitb.testproject.ui.model.gooprickle;
+
 
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import dylar.bitb.testproject.R;
 
-
-public class GooAndPrickleAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class GooAndPrickleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final int VIEW_GOO = 1;
     public static final int VIEW_PRICKLE = 2;
@@ -21,7 +20,7 @@ public class GooAndPrickleAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_GOO:
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_dashboard_row_goo, parent, false);
@@ -34,7 +33,7 @@ public class GooAndPrickleAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case VIEW_GOO:
                 gooAndPrickleView.setRowGoo((IGooRowView) holder, position);

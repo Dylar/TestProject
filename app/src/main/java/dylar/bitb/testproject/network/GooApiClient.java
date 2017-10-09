@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GooApiClient {
     protected String baseUrl;
-    protected IGooService programService;
+    protected Api.Goo programService;
 
     public GooApiClient(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -18,7 +18,7 @@ public class GooApiClient {
         programService = buildProgramService(baseUrl);
     }
 
-    private IGooService buildProgramService(String baseUrl) {
+    private Api.Goo buildProgramService(String baseUrl) {
         return new Retrofit
                 .Builder()
                 .baseUrl(baseUrl)
@@ -27,7 +27,7 @@ public class GooApiClient {
                         new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create())
                 )
                 .build()
-                .create(IGooService.class);
+                .create(Api.Goo.class);
     }
 
     public Observable<Goo> getGoos() {

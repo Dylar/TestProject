@@ -5,11 +5,17 @@
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_dashboard_recyclerview"
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/fragment_dashboard_recyclerview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/activity_horizontal_margin"-->
+        <!--android:gravity="center" />-->
+    <TextView
+        android:id="@+id/reddit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:gravity="center" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        />
 
 </LinearLayout>

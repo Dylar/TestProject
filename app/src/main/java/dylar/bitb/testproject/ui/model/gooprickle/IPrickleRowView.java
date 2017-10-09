@@ -1,4 +1,4 @@
-package dylar.bitb.testproject.ui.model;
+package dylar.bitb.testproject.ui.model.gooprickle;
 
 
 public interface IPrickleRowView {

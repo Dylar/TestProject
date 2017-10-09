@@ -48,6 +48,14 @@ android {
             applicationId "dylar.bitb.testproject"
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -65,13 +73,13 @@ dependencies {
     compile "com.android.support:percent:$supportSDK"
     compile "com.android.support:recyclerview-v7:$supportSDK"
 
-    //cache
+    //store
     compile "com.nytimes.android:cache3:$store"
     compile "com.nytimes.android:store3:$store"
     compile "com.nytimes.android:middleware3:$store"
-    compile "com.nytimes.android:middleware-jackson3:$store"
-    compile "com.nytimes.android:middleware-moshi3:$store"
     compile "com.nytimes.android:filesystem3:$store"
+    compile "io.reactivex.rxjava2:rxjava:2.1.2"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     //database
     compile "io.requery:requery:$requery"
@@ -85,8 +93,10 @@ dependencies {
     //cleanCode
     provided "org.projectlombok:lombok:$lombok"
     annotationProcessor "org.projectlombok:lombok:$lombok"
+
     compile "com.google.dagger:dagger:$dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+
     compile "com.jakewharton:butterknife:$butterknife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
 
